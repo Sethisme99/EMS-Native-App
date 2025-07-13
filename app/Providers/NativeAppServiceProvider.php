@@ -20,9 +20,9 @@ class NativeAppServiceProvider implements ProvidesPhpIni
             ->showDevTools(false)
             ->rememberState();
 
-
         MenuBar::create()
             ->showDockIcon();
+
     }
 
     /**

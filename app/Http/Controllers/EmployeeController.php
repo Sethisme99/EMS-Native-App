@@ -8,6 +8,7 @@ use App\Models\Position;
 use App\Models\Department;
 use App\Http\Requests\AddEmployeeRequest;
 use App\Http\Requests\UpdateEmployeeRequest;
+use Illuminate\Support\Facades\DB;
 
 
 
@@ -18,8 +19,8 @@ class EmployeeController extends Controller
      */
     public function index()
     {
-        $employee = Employee::all();
-        return view('employees.index', compact('employee'));
+        $employees = Employee::all();
+        return view('employees.index', compact('employees'));
     }
 
     /**
@@ -39,7 +40,7 @@ class EmployeeController extends Controller
     public function store(AddEmployeeRequest $request)
     {
         //
-        $data = $request->validate();
+        $data = $request->validated();
         $data['image'] = $this->saveImage($request->file('image'));
         Employee::create($data);
         return to_route('employees.index')->with('success', 'Employee created successfully');
